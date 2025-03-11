@@ -5,108 +5,85 @@
 }
 
 <style>
-    /* Estilos generales para la página */
-    body {
-        background-color: #f8f9fa; /* Fondo suave */
+    .custom-btn {
+        transition: all 0.3s ease;
+        border: none;
+        min-width: 80px;
     }
 
-    h1 {
-        color: #6c757d; /* Color de texto suave */
+    .btn-create {
+        background-color: #D1E7FF; /* Azul pastel */
+        color: #0d6efd;
     }
 
-    /* Estilos para la tabla */
-    .table {
-        background-color: #ffffff; /* Fondo blanco para la tabla */
-        border-radius: 8px; /* Bordes redondeados */
-        overflow: hidden; /* Para que los bordes redondeados funcionen */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    .btn-edit {
+        background-color: #FFF3CD; /* Amarillo pastel */
+        color: #ffc107;
     }
 
-    .table thead {
-        background-color: #e9ecef; /* Fondo suave para el encabezado */
+    .btn-details {
+        background-color: #D4EDDA; /* Verde pastel */
+        color: #198754;
     }
 
-    .table th, .table td {
-        border-color: #dee2e6; /* Color de borde suave */
+    .btn-delete {
+        background-color: #F8D7DA; /* Rojo pastel */
+        color: #dc3545;
     }
 
-    /* Estilos para los botones */
-    .btn-primary {
-        background-color: #a2d5f2; /* Azul pastel */
-        border-color: #a2d5f2;
-        color: #333; /* Texto oscuro para mejor contraste */
-    }
-
-    .btn-primary:hover {
-        background-color: #8cc2e0; /* Azul pastel más oscuro al pasar el mouse */
-        border-color: #8cc2e0;
-    }
-
-    .btn-warning {
-        background-color: #f7d794; /* Amarillo pastel */
-        border-color: #f7d794;
-        color: #333;
-    }
-
-    .btn-warning:hover {
-        background-color: #e6c583; /* Amarillo pastel más oscuro al pasar el mouse */
-        border-color: #e6c583;
-    }
-
-    .btn-info {
-        background-color: #b8e994; /* Verde pastel */
-        border-color: #b8e994;
-        color: #333;
-    }
-
-    .btn-info:hover {
-        background-color: #a6d582; /* Verde pastel más oscuro al pasar el mouse */
-        border-color: #a6d582;
-    }
-
-    .btn-danger {
-        background-color: #f8a5c2; /* Rosa pastel */
-        border-color: #f8a5c2;
-        color: #333;
-    }
-
-    .btn-danger:hover {
-        background-color: #e694b0; /* Rosa pastel más oscuro al pasar el mouse */
-        border-color: #e694b0;
-    }
-
-    /* Estilos para las filas de la tabla */
-    .table tbody tr:hover {
-        background-color: #f1f3f5; /* Fondo suave al pasar el mouse sobre las filas */
+    .card-header {
+        background-color: #f8f9fa;
     }
 </style>
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <div class="card border-0 shadow-lg">
+        <div class="card-header border-0 bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="mb-0 text-secondary"><i class="bi bi-search me-2"></i>Búsqueda de Categorías</h3>
+                <button class="btn btn-create custom-btn" onclick="window.location.href='@Url.Action("Create")'">
+                    <i class="bi bi-plus-circle me-2"></i>Nueva Categoría
+                </button>
+            </div>
+        </div>
 
-<p>
-    <button class="btn btn-primary" onclick="window.location.href='@Url.Action("Create")'">Create New</button>
-</p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-            <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
-                <td>
-                    <button class="btn btn-warning btn-sm" onclick="window.location.href='@Url.Action("Edit", new { id = item.Id })'">Edit</button>
-                    <button class="btn btn-info btn-sm" onclick="window.location.href='@Url.Action("Details", new { id = item.Id })'">Details</button>
-                    <button class="btn btn-danger btn-sm" onclick="window.location.href='@Url.Action("Delete", new { id = item.Id })'">Delete</button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                            <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                            <th class="text-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                                <td class="text-end">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-edit custom-btn btn-sm me-2"
+                                                onclick="window.location.href='@Url.Action("Edit", new { id = item.Id })'">
+                                            <i class="bi bi-pencil-square me-1"></i>Editar
+                                        </button>
+                                        <button type="button" class="btn btn-details custom-btn btn-sm me-2"
+                                                onclick="window.location.href='@Url.Action("Details", new { id = item.Id })'">
+                                            <i class="bi bi-eye me-1"></i>Detalles
+                                        </button>
+                                        <button type="button" class="btn btn-delete custom-btn btn-sm"
+                                                onclick="window.location.href='@Url.Action("Delete", new { id = item.Id })'">
+                                            <i class="bi bi-trash me-1"></i>Eliminar
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
