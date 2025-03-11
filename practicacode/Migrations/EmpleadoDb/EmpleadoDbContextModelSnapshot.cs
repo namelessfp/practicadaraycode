@@ -7,10 +7,10 @@ using practicacode.Models;
 
 #nullable disable
 
-namespace practicacode.Migrations
+namespace practicacode.Migrations.EmpleadoDb
 {
-    [DbContext(typeof(ESFEDbContext))]
-    partial class ESFEDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(EmpleadoDbContext))]
+    partial class EmpleadoDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace practicacode.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("practicacode.Proveedor", b =>
+            modelBuilder.Entity("practicacode.Models.Empleado", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,7 +29,15 @@ namespace practicacode.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Apellido")
+                    b.Property<string>("DUI")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -37,9 +45,13 @@ namespace practicacode.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Proveedores");
+                    b.ToTable("Empleado");
                 });
 #pragma warning restore 612, 618
         }
